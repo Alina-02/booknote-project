@@ -42,9 +42,9 @@ const MoreBooks = ({ addBook }) => {
     <>
       <button
         onClick={moreBooksClicked}
-        className="h-30 w-30 bg-brown_text relative flex items-center justify-center shadow-xl shadow-gray-400 rounded-xl group hover:bg-brown_9 cursor-pointer"
+        className="h-[200px] w-full bg-brown_text relative flex items-center justify-center shadow-xl shadow-gray-400 rounded-xl group hover:bg-brown_9 cursor-pointer"
       >
-        <IoIosAddCircleOutline size={35} />
+        <IoIosAddCircleOutline className="hover:hidden" size={35} />
         <div className="hidden group-hover:block absolute left-[50%] translate-x-[-50%]">
           <h3 className="p-2 font-playfair text-2xl font-bold text-brown_text tracking-wider text-center">
             New book

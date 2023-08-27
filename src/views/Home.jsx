@@ -4,17 +4,17 @@ import Book from "../components/Book";
 import MoreBooks from "../components/MoreBooks";
 import cover1 from "../assets/img/final_emp_cover.webp";
 
-const LOCAL_STORAGE_KEY = "booknote:books";
+import { LOCAL_STORAGE_KEY } from "../utils/constants";
 
 const Home = () => {
   const [books, setBooks] = useState([]);
 
   function loadSavedBooks() {
     const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
-    console.log(saved);
     if (saved) {
       setBooks(JSON.parse(saved));
     }
+    console.log(saved);
   }
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const Home = () => {
     setBooksAndSave([
       ...books,
       {
-        id: crypto.randomUUID(),
+        key: crypto.randomUUID(),
         title: bookTitle,
         author: bookAuthor,
         saga: bookSaga,
@@ -39,25 +39,33 @@ const Home = () => {
     ]);
   }
 
+  function deleteBookById(bookId) {
+    const newBooks = books.filter((book) => book.id != bookId);
+    setBooksAndSave(newBooks);
+  }
+
   return (
-    <div className="bg-auto bg-gradient-to-r from-brown_2 to-brown_7 ">
+    <div className="h-screen w-full">
       <Header></Header>
-      <div className="grid sm:grid-cols-4 gap-12 m-auto md:pl-20 p-10 py-10">
-        {books.map((data, key) => (
+      <div className="bg-auto bg-gradient-to-r from-brown_2 to-brown_7 max-w-[1040] m-auto px-7 py-7">
+        <div className="grid sm:grid-cols-4 gap-12">
+          {books.map((data, key) => (
+            <Book
+              title={data.title}
+              author={data.author}
+              saga={data.saga}
+              cover={data.cover}
+              id={data.key != null ? data.key : data.id}
+            />
+          ))}
           <Book
-            title={data.title}
-            author={data.author}
-            saga={data.saga}
-            cover={data.cover}
+            cover={cover1}
+            title="The Final Empire"
+            author="Brandon Sanderson"
+            saga="Stormlight Archive"
           />
-        ))}
-        <Book
-          cover={cover1}
-          title="The Final Empire"
-          author="Brandon Sanderson"
-          saga="Stormlight Archive"
-        />
-        <MoreBooks addBook={addBook} />
+          <MoreBooks addBook={addBook} />
+        </div>
       </div>
     </div>
   );

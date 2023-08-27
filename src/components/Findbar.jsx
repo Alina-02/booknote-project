@@ -5,7 +5,7 @@ const Findbar = () => {
     <div>
       <input
         type="text"
-        className=" block w-full p-2.5 bg-white text-brown_9 text-sm rounded-lg focus:ring-brown_6 focus:border-brown_6"
+        className="focus:outline-none focus:ring-brown_1 focus:ring-2 focus:border-brown_2 block w-full p-2.5 bg-white text-brown_dark_text text-sm rounded-lg focus:ring-brown_6 focus:border-brown_6"
         placeholder="Search your book..."
       />
     </div>
