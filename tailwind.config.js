@@ -31,6 +31,8 @@ export default {
       sans: ["Graphik", "sans-serif"],
       serif: ["Merriweather", "serif"],
       playfair: ["Playfair Display", "serif"],
+      play: ["Playfair", "serif"],
+      serifdisplay: ["DM Serif Display", "serif"],
     },
     extend: {
       spacing: {

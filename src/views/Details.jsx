@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import loadBook from "../utils/loadBook";
 import DetailsHeader from "../components/DetailsHeader";
+import Quote from "../components/Quote";
 
 const pathname = window.location.pathname;
 const key = pathname.substring(8, pathname.length);
@@ -44,7 +45,14 @@ const Details = () => {
 
   return (
     <>
-      <DetailsHeader />
+      <div className="w-full">
+        <DetailsHeader />
+        <div className="p-7 space-y-6 w-full h-screen bg-auto bg-gradient-to-r from-brown_text to-brown_1">
+          <Quote />
+          <Quote />
+          <Quote />
+        </div>
+      </div>
     </>
   );
 };
