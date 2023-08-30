@@ -10,7 +10,7 @@ export default {
     },
     colors: {
       black: "#000",
-      white: "#fff",
+      white: "#F0EBEB",
       brown_text: "#FFE9D3CA",
       brown_0: "#EDC4B3",
       brown_1: "#E6B8A2",

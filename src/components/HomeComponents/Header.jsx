@@ -3,7 +3,7 @@ import Findbar from "./Findbar";
 
 const Header = () => {
   return (
-    <div className="p-5 w-full flex flex-col items-center bg-brown_9">
+    <div className=" shadow-lg p-5 w-full flex flex-col items-center bg-brown_9">
       <h1 className="p-5 text-brown_text text-center text-4xl font-playfair font-normal">
         Find a BookNote
       </h1>

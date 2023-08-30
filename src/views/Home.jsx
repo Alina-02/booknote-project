@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
-import Header from "../components/Header";
-import Book from "../components/Book";
-import MoreBooks from "../components/MoreBooks";
-import cover1 from "../assets/img/final_emp_cover.webp";
+import React, { useState, useEffect, useContext } from "react";
+
+import Header from "../components/HomeComponents/Header";
+import Book from "../components/HomeComponents/Book";
+import MoreBooks from "../components/HomeComponents/MoreBooks";
 
 import { LOCAL_STORAGE_KEY } from "../utils/constants";
+import cover1 from "../assets/img/final_emp_cover.webp";
 
 const Home = () => {
   const [books, setBooks] = useState([]);
@@ -14,7 +15,6 @@ const Home = () => {
     if (saved) {
       setBooks(JSON.parse(saved));
     }
-    console.log(saved);
   }
 
   useEffect(() => {
@@ -26,15 +26,18 @@ const Home = () => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newBooks));
   }
 
-  function addBook(bookTitle, bookAuthor, bookSaga = "", bookCover = "") {
+  function addBook(bookTitle, bookAuthor, bookSaga = "", bookCover = false) {
+    const bookId = (bookTitle + bookAuthor).replace(/ /g, "").toLowerCase();
+
     setBooksAndSave([
       ...books,
       {
-        key: crypto.randomUUID(),
         title: bookTitle,
         author: bookAuthor,
         saga: bookSaga,
+        id: bookId,
         cover: bookCover,
+        quotes: [],
       },
     ]);
   }
@@ -45,17 +48,18 @@ const Home = () => {
   }
 
   return (
-    <div className="h-screen w-full">
+    <div className="w-full">
       <Header></Header>
-      <div className="bg-auto bg-gradient-to-r from-brown_2 to-brown_7 max-w-[1040] m-auto px-7 py-7">
+      <div className="bg-[#F0EBEB] w-full h-5 shadow-lg"></div>
+      <div className="px-7 pt-7 pb-7 space-x-6 space-y-6 w-full h-screen bg-gradient-to-r from-brown_1 to-brown_2">
         <div className="grid sm:grid-cols-4 gap-12">
           {books.map((data, key) => (
             <Book
+              key={crypto.randomUUID()}
               title={data.title}
-              author={data.author}
-              saga={data.saga}
-              cover={data.cover}
-              id={data.key != null ? data.key : data.id}
+              id={data.id}
+              beCover={data.cover}
+              deleteBook={deleteBookById}
             />
           ))}
           <Book

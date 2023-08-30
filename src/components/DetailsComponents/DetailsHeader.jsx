@@ -1,5 +1,5 @@
 import React from "react";
-import aaa from "../assets/img/final_emp_cover.webp";
+import aaa from "../../assets/img/final_emp_cover.webp";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 
@@ -24,14 +24,16 @@ const DetailsHeader = ({ title, author, saga, cover }) => {
         </div>
         <div className="content-center text-top p-2.5 flex flex-col justify-center">
           <h1 className="px-5 text-brown_text text-4xl font-playfair font-bold">
-            The Final Empire
+            {title}
           </h1>
           <h3 className="px-5 text-brown_text text-2xl font-playfair">
-            Brandon Sanderson
+            {author}
           </h3>
-          <h3 className="px-5 text-brown_text text-2xl font-playfair">
-            Mistborn
-          </h3>
+          {saga != "" ? (
+            <h3 className="px-5 text-brown_text text-2xl font-playfair">
+              {saga}
+            </h3>
+          ) : null}
           <p className="px-5 pt-7 text-brown_text text-1xl font-playfair">
             To tell you the truth, I’d kind of like to see one of those flowers
             for myself
