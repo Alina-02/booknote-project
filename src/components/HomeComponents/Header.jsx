@@ -1,14 +1,14 @@
 import React from "react";
 import Findbar from "./Findbar";
 
-const Header = () => {
+const Header = ({ find }) => {
   return (
     <div className=" shadow-lg p-5 w-full flex flex-col items-center bg-brown_9">
       <h1 className="p-5 text-brown_text text-center text-4xl font-playfair font-normal">
         Find a BookNote
       </h1>
       <div className="w-2/5 p-2.5">
-        <Findbar />
+        <Findbar findB={find} />
       </div>
       <div className="p-10 flex flex-col items-center">
         <p className="text-brown_text text-base font-playfair text-normal italic">

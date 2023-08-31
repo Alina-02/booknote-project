@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import Header from "../components/HomeComponents/Header";
 import Book from "../components/HomeComponents/Book";
@@ -9,11 +9,13 @@ import cover1 from "../assets/img/final_emp_cover.webp";
 
 const Home = () => {
   const [books, setBooks] = useState([]);
+  const [seenBooks, setSeenBooks] = useState([]);
 
   function loadSavedBooks() {
     const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (saved) {
       setBooks(JSON.parse(saved));
+      setSeenBooks(JSON.parse(saved));
     }
   }
 
@@ -42,6 +44,19 @@ const Home = () => {
     ]);
   }
 
+  function findBook(title) {
+    if (title == "") {
+      loadSavedBooks();
+    } else {
+      if (books.length != 0) {
+        const newBooks = books.filter((book) => book.title == title);
+        setSeenBooks(newBooks);
+        console.log("Seen books: ", seenBooks);
+        console.log("Books: ", books);
+      }
+    }
+  }
+
   function deleteBookById(bookId) {
     const newBooks = books.filter((book) => book.id != bookId);
     setBooksAndSave(newBooks);
@@ -49,11 +64,11 @@ const Home = () => {
 
   return (
     <div className="w-full">
-      <Header></Header>
+      <Header find={findBook}></Header>
       <div className="bg-[#F0EBEB] w-full h-5 shadow-lg"></div>
       <div className="px-7 pt-7 pb-7 space-x-6 space-y-6 w-full h-screen bg-gradient-to-r from-brown_1 to-brown_2">
         <div className="grid sm:grid-cols-4 gap-12">
-          {books.map((data, key) => (
+          {seenBooks.map((data, key) => (
             <Book
               key={crypto.randomUUID()}
               title={data.title}
@@ -62,12 +77,6 @@ const Home = () => {
               deleteBook={deleteBookById}
             />
           ))}
-          <Book
-            cover={cover1}
-            title="The Final Empire"
-            author="Brandon Sanderson"
-            saga="Stormlight Archive"
-          />
           <MoreBooks addBook={addBook} />
         </div>
       </div>

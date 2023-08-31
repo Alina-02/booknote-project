@@ -84,7 +84,7 @@ const MoreBooks = ({ addBook }) => {
       {seen ? (
         <>
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-            <div className="relative w-2/5 my-6 mx-auto max-w-3xl">
+            <div className="min-w-[343px] min-h-[487px] relative w-2/5 my-6 mx-auto max-w-3xl">
               <div className="border-4 border-brown_dark_text rounded-lg shadow-lg relative flex flex-col w-full bg-brown_text/90 outline-none focus:outline-none">
                 <button
                   onClick={() => {
@@ -117,6 +117,7 @@ const MoreBooks = ({ addBook }) => {
                       placeholder="Title"
                       value={title}
                       onChange={onChangeTitle}
+                      required
                     />
                     <label className="font-playfair font-bold text-brown_dark_text">
                       Author*
@@ -126,6 +127,7 @@ const MoreBooks = ({ addBook }) => {
                       placeholder="Author"
                       value={author}
                       onChange={onChangeAuthor}
+                      required
                     />
                     <label className="font-playfair font-bold text-brown_dark_text">
                       Saga
@@ -148,7 +150,7 @@ const MoreBooks = ({ addBook }) => {
                       onChange={onChangeCover}
                     />
                     <div className="flex items-center justify-end pb-6 pt-4 pr-1 rounded-b">
-                      <div className="absolute p-6 left-0 font-playfair text-brown_dark_text">
+                      <div className=" absolute p-6 left-0 font-playfair text-brown_dark_text">
                         <p className="text-sm">*campos obligatorios</p>
                       </div>
                       <button

@@ -14,18 +14,16 @@ const Book = ({ title, id, beCover, deleteBook }) => {
   };
 
   useEffect(() => {
-    console.log(title, beCover);
     if (beCover) {
       getDownloadURL(ref(storage, `images/${id}`)).then((url) => {
         const img = coverRef.current;
-        console.log(img);
+
         if (img != null) {
           img.setAttribute("src", url);
         }
-        console.log(url);
       });
     }
-  }, [coverRef]);
+  }, []);
 
   return (
     <div className="bg-brown_6 min-w-[130px] min-h-[200px] relative flex items-center justify-center h-auto w-full shadow-xl shadow-gray-400 rounded-xl group hover:bg-brown_9 cursor-pointer">
