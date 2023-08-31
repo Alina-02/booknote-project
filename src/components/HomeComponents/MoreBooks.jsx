@@ -67,7 +67,7 @@ const MoreBooks = ({ addBook }) => {
     <>
       <button
         onClick={moreBooksClicked}
-        className="min-w-[130px] min-h-[200px] h-[200px] w-full bg-brown_text relative flex items-center justify-center shadow-xl shadow-gray-400 rounded-xl group hover:bg-brown_9 cursor-pointer"
+        className="min-w-[185px] min-h-[282px] w-full bg-brown_text relative flex items-center justify-center shadow-xl shadow-gray-400 rounded-xl group hover:bg-brown_9 cursor-pointer"
       >
         <IoIosAddCircleOutline
           style={{ color: "#774936" }}
@@ -117,6 +117,7 @@ const MoreBooks = ({ addBook }) => {
                       placeholder="Title"
                       value={title}
                       onChange={onChangeTitle}
+                      maxLength={30}
                       required
                     />
                     <label className="font-playfair font-bold text-brown_dark_text">
@@ -125,6 +126,7 @@ const MoreBooks = ({ addBook }) => {
                     <input
                       className="bg-white text-brown_dark_text shadow-sm focus:ring-brown_2 focus:ring-1 focus:border-brown_2 focus:outline-none p-2.5 mx-1 mb-1 mt-0.15 rounded-lg font-playfair"
                       placeholder="Author"
+                      maxLength={25}
                       value={author}
                       onChange={onChangeAuthor}
                       required
@@ -136,6 +138,7 @@ const MoreBooks = ({ addBook }) => {
                       className="bg-white outline-none text-brown_dark_text shadow-sm focus:ring-brown_2 focus:ring-1 focus:border-brown_2 focus:outline-none p-2.5 mx-1 mb-1 mt-0.15 rounded-lg font-playfair"
                       placeholder="Saga"
                       value={saga}
+                      maxLength={25}
                       onChange={onChangeSaga}
                     />
                     <label className="font-playfair font-bold text-brown_dark_text">
@@ -154,7 +157,7 @@ const MoreBooks = ({ addBook }) => {
                         <p className="text-sm">*campos obligatorios</p>
                       </div>
                       <button
-                        className="my-1 font-playfair text-brown_dark_text background-transparent font-bold uppercase px-6 py-2 mb-1 text-sm outline-none focus:outline-none ease-linear transition-all duration-150"
+                        className="my-1 font-playfair text-brown_dark_text background-transparent font-bold uppercase px-6 py-2 mb-1 text-sm outline-none focus:outline-none ease-linear transition-all duration-150 cursor-pointer"
                         type="button"
                         onClick={() => {
                           setTitle("");

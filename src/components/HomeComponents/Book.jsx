@@ -26,7 +26,7 @@ const Book = ({ title, id, beCover, deleteBook }) => {
   }, []);
 
   return (
-    <div className="bg-brown_6 min-w-[130px] min-h-[200px] relative flex items-center justify-center h-auto w-full shadow-xl shadow-gray-400 rounded-xl group hover:bg-brown_9 cursor-pointer">
+    <div className="bg-brown_6 min-w-[185px] min-h-[282px] relative flex items-center justify-center h-auto w-full shadow-xl shadow-gray-400 rounded-xl group hover:bg-brown_9 cursor-pointer">
       <button
         onClick={handleBookClick}
         className="h-full min-w-[130px] min-h-auto relative flex items-center justify-center w-full rounded-xl cursor-pointer"
@@ -39,17 +39,19 @@ const Book = ({ title, id, beCover, deleteBook }) => {
             className="rounded-xl group-hover:opacity-10 "
           />
         ) : (
-          <div className="group-hover:block absolute top.[50%] left-[50%] translate-x-[-50%]">
-            <h3 className="m-2 p-2 font-playfair text-2xl font-bold text-[#F0EBEB] tracking-wider text-center">
+          <div className="group-hover:block flex text-center">
+            <h3 className="break-all m-2 p-2 font-playfair text-2xl font-bold text-[#F0EBEB] tracking-wider text-center">
               {title}
             </h3>
           </div>
         )}
 
-        <div className="hidden group-hover:block absolute top.[50%] left-[50%] translate-x-[-50%]">
-          <h3 className="m-2 p-2 font-playfair text-2xl font-bold text-brown_text tracking-wider text-center">
-            {title}
-          </h3>
+        <div className="hidden group-hover:block text-center absolute top.[50%] left-[50%] translate-x-[-50%]">
+          {beCover ? (
+            <h3 className="m-2 font-playfair text-2xl font-bold text-brown_text tracking-wider">
+              {title}
+            </h3>
+          ) : null}
         </div>
       </button>
       <div className="hidden group-hover:block absolute right-0 top-0 m-2.5">

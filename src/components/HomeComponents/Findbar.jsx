@@ -20,7 +20,7 @@ const Findbar = ({ findB }) => {
         onClick={() => {
           findB(search);
         }}
-        className="focus:bg-brown_2 hover:bg-brown_4 focus:ring-brown_1 focus:ring-1 focus:border-brown_2 text-brown_dark_text font-bold bg-brown_2 text-lg font-playfair p-2.5 shadow-lg rounded-lg rounded-l-none"
+        className="min-w-[53px] w-1/4 focus:bg-brown_2 hover:bg-brown_4 focus:ring-brown_1 focus:ring-1 focus:border-brown_2 text-brown_dark_text font-bold bg-brown_2 text-lg font-playfair p-2.5 shadow-lg rounded-lg rounded-l-none"
       >
         Find
       </button>

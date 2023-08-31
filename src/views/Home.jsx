@@ -25,6 +25,7 @@ const Home = () => {
 
   function setBooksAndSave(newBooks) {
     setBooks(newBooks);
+    setSeenBooks(newBooks);
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newBooks));
   }
 
@@ -66,8 +67,8 @@ const Home = () => {
     <div className="w-full">
       <Header find={findBook}></Header>
       <div className="bg-[#F0EBEB] w-full h-5 shadow-lg"></div>
-      <div className="px-7 pt-7 pb-7 space-x-6 space-y-6 w-full h-screen bg-gradient-to-r from-brown_1 to-brown_2">
-        <div className="grid sm:grid-cols-4 gap-12">
+      <div className="min-w-[348px] px-7 pt-7 pb-7 space-x-6 space-y-6 w-full h-screen bg-gradient-to-r from-brown_1 to-brown_2">
+        <div className="min-w-[348px] mr-2 grid m-auto grid-cols-3 gap-4 md:grid-cols-4 lg:grid-cols-5">
           {seenBooks.map((data, key) => (
             <Book
               key={crypto.randomUUID()}
