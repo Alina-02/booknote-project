@@ -49,9 +49,6 @@ const MoreBooks = ({ addBook }) => {
     const bookId = (title + author).replace(/ /g, "").toLowerCase();
     uploadCoverBook(bookId);
 
-    console.log(cover);
-    console.log(beCover);
-
     addBook(title, author, saga, beCover);
     setTitle("");
     setAuthor("");
@@ -94,11 +91,11 @@ const MoreBooks = ({ addBook }) => {
                     setCover("");
                     setSeen(false);
                   }}
-                  style={{ color: "#5E3A2B" }}
                 >
                   <MdExitToApp
                     size={30}
                     className="right-0 top-0 absolute m-2.5"
+                    style={{ color: "#5E3A2B" }}
                   ></MdExitToApp>
                 </button>
 

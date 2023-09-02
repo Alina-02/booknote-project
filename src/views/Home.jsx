@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 
 import Header from "../components/HomeComponents/Header";
 import Book from "../components/HomeComponents/Book";
 import MoreBooks from "../components/HomeComponents/MoreBooks";
 
 import { LOCAL_STORAGE_KEY } from "../utils/constants";
-import cover1 from "../assets/img/final_emp_cover.webp";
 
 const Home = () => {
   const [books, setBooks] = useState([]);
@@ -52,8 +51,6 @@ const Home = () => {
       if (books.length != 0) {
         const newBooks = books.filter((book) => book.title == title);
         setSeenBooks(newBooks);
-        console.log("Seen books: ", seenBooks);
-        console.log("Books: ", books);
       }
     }
   }
