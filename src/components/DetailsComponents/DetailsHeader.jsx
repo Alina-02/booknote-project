@@ -15,10 +15,11 @@ const DetailsHeader = ({ title, bookId, author, saga, beCover }) => {
   };
 
   useEffect(() => {
+    console.log(beCover);
     if (beCover) {
       getDownloadURL(ref(storage, `images/${bookId}`)).then((url) => {
         const img = coverRef.current;
-
+        console.log("img ", img);
         if (img != null) {
           img.setAttribute("src", url);
         }

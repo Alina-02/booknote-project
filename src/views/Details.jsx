@@ -1,45 +1,62 @@
 import React, { useState, useEffect } from "react";
 
-import loadBook from "../utils/loadBook";
-
 import DetailsHeader from "../components/DetailsComponents/DetailsHeader";
 import Quote from "../components/DetailsComponents/Quote";
 import MoreQuotes from "../components/DetailsComponents/MoreQuotes";
 
-const pathname = window.location.pathname;
-const keyBook = pathname.substring(8, pathname.length);
-
-const resource = loadBook(keyBook);
+import { LOCAL_STORAGE_KEY } from "../utils/constants";
 
 const Details = () => {
   const [quotes, setQuotes] = useState([]);
-
-  const book = resource.selectedBook.read();
+  const [book, setBook] = useState();
 
   function loadSavedQuotes() {
-    const saved = localStorage.getItem(keyBook);
-    if (saved) {
-      setQuotes(JSON.parse(saved));
+    console.log("Book en load: ", book);
+    if (book != null) {
+      const saved = book.quotes;
+      if (saved) {
+        setQuotes(saved);
+      }
     }
   }
 
   useEffect(() => {
-    loadSavedQuotes();
+    const loadBookAsync = async () => {
+      try {
+        const response = localStorage.getItem(LOCAL_STORAGE_KEY);
+        const arrayRes = await JSON.parse(response);
+
+        const pathname = await window.location.pathname;
+        const keyBook = pathname.substring(8, pathname.length);
+
+        const selected = await arrayRes.filter((obj) => obj.id == keyBook);
+        console.log("Selected: ", selected);
+        setBook(selected[0]);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    loadBookAsync().then(() => {
+      console.log("Book: ", book);
+      loadSavedQuotes();
+    });
   }, []);
 
   function setQuotesAndSave(newQuotes) {
     setQuotes(newQuotes);
-    localStorage.setItem(keyBook, JSON.stringify(newQuotes));
+    book.quotes = newQuotes;
+    console.log(book.quotes);
   }
 
   function addQuotes(quote, character = "") {
     setQuotesAndSave([
-      ...quotes,
       {
         id: crypto.randomUUID(),
         text: quote,
         character: character,
       },
+      ...quotes,
     ]);
   }
 
@@ -60,9 +77,10 @@ const Details = () => {
             beCover={book.cover}
           />
         ) : null}
+
         <div className="bg-[#F0EBEB] w-full h-5 shadow-lg"></div>
 
-        <div className="px-7 pt-7 pb-7 space-y-6 w-full h-full bg-gradient-to-r from-brown_text to-brown_1">
+        <div className="px-7 pt-7 pb-7 space-y-6 w-full h-full bg-auto bg-gradient-to-r from-brown_text to-brown_1">
           {quotes != []
             ? quotes.map((data) => (
                 <Quote
@@ -75,24 +93,6 @@ const Details = () => {
               ))
             : null}
 
-          <Quote
-            quote='Pero estoy a favor de ese oficio, de todos modos. Lo que sea con tal de
-        dar empleo remunerado a los músicos. No es que no seamos capaces de
-        hacer otra cosa, sino más bien que o se nos busca alguna acticidad
-        productiva o solemos empezar a hacer preguntas del tipo: "Oye, ¿cómo es
-        que esa gente no me está venerando a mí"'
-            character=""
-            saga="Mistborn"
-          />
-          <Quote
-            quote='Pero estoy a favor de ese oficio, de todos modos. Lo que sea con tal de
-        dar empleo remunerado a los músicos. No es que no seamos capaces de
-        hacer otra cosa, sino más bien que o se nos busca alguna acticidad
-        productiva o solemos empezar a hacer preguntas del tipo: "Oye, ¿cómo es
-        que esa gente no me está venerando a mí"'
-            character="Vin"
-            saga="Mistborn"
-          />
           <MoreQuotes addQuote={addQuotes} />
         </div>
       </div>

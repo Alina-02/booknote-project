@@ -6,9 +6,17 @@ import MoreBooks from "../components/HomeComponents/MoreBooks";
 
 import { LOCAL_STORAGE_KEY } from "../utils/constants";
 
+import { removeAccents } from "../utils/utils";
+
+import { db } from "../firebase";
+import { getDocs, collection, addDoc } from "firebase/firestore";
+
 const Home = () => {
   const [books, setBooks] = useState([]);
   const [seenBooks, setSeenBooks] = useState([]);
+
+  const [bookDB, setBooksDB] = useState([]);
+  const bookCollectionRef = collection(db, "books");
 
   function loadSavedBooks() {
     const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
@@ -20,6 +28,23 @@ const Home = () => {
 
   useEffect(() => {
     loadSavedBooks();
+
+    //CON FIREBASE
+    const getBookList = async () => {
+      try {
+        const data = await getDocs(bookCollectionRef);
+        const filteredData = data.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        console.log(filteredData);
+        setBooksDB(filteredData);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getBookList();
   }, []);
 
   function setBooksAndSave(newBooks) {
@@ -29,7 +54,9 @@ const Home = () => {
   }
 
   function addBook(bookTitle, bookAuthor, bookSaga = "", bookCover = false) {
-    const bookId = (bookTitle + bookAuthor).replace(/ /g, "").toLowerCase();
+    const bookId = removeAccents(
+      (bookTitle + bookAuthor).replace(/ /g, "").toLowerCase()
+    );
 
     setBooksAndSave([
       ...books,
@@ -42,6 +69,23 @@ const Home = () => {
         quotes: [],
       },
     ]);
+
+    const storeDBData = async () => {
+      try {
+        const docRef = await addDoc(collection(db, "books"), {
+          title: bookTitle,
+          author: bookAuthor,
+          saga: bookSaga,
+          id: bookId,
+          cover: bookCover,
+          quotes: [],
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    storeDBData();
   }
 
   function findBook(title) {
