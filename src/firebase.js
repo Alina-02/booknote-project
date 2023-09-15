@@ -2,15 +2,25 @@
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 import { getFirestore } from "firebase/firestore";
+
+import {
+  API_KEY,
+  AUTH_DOMAIN,
+  PROJECT_ID,
+  STORAGE_BUCKET,
+  MESSAGING_SENDER_ID,
+  APP_ID,
+} from "./firebase_constants";
+
 //hi
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBDWx61rZktleXwnnvh2Agl_69yqTAIX3M",
-  authDomain: "booknote-67b71.firebaseapp.com",
-  projectId: "booknote-67b71",
-  storageBucket: "booknote-67b71.appspot.com",
-  messagingSenderId: "419625535077",
-  appId: "1:419625535077:web:1565ed855663b39b24688c",
+  apiKey: API_KEY,
+  authDomain: AUTH_DOMAIN,
+  projectId: PROJECT_ID,
+  storageBucket: STORAGE_BUCKET,
+  messagingSenderId: MESSAGING_SENDER_ID,
+  appId: APP_ID,
 };
 
 // Initialize Firebase
